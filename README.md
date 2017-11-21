@@ -14,4 +14,5 @@ The following guides/scripts have a home here:
 2. An explanation on the data-challenge with docker deployment (without using orkestration). About backing up your data in configuration, logging and user/application -data 
 3. Building a small framework to update docker images while still being able to roll back to a previous version
 
-There's more, but later
+There's more, but later.
+You can find me at https://www.hanscees.com/ or on twitter as @hanscees 
