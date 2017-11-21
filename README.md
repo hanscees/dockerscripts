@@ -1,5 +1,5 @@
 # dockerscripts
-a home for scripts I use on docker hosts, staerting on 2017-11-21
+A public home for scripts I use on docker hosts, starting on 2017-11-21
 
 I have an esxi vmware host at home I use to hosts some websites, a reverse-proxy to protect the websites, a mail-server, a time-server and so on. Just for fun and profit and to learn and play around.
 
