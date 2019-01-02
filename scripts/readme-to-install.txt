@@ -39,8 +39,7 @@ done
 ####################
 
 cat ImageId-file
-mv get-docker-hub-image-tag-digest.sh getdigest
-mv   getdigest
+mv get-docker-hub-image-tag-digest.sh getdigest  #yes its silly
 cat ImageId-file | ./check-docker-image-updates.sh
 
 
