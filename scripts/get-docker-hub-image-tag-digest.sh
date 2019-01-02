@@ -16,7 +16,7 @@ main() {
   local token=$(get_token $image)
   local digest=$(get_digest $image $tag $token)
 
-echo " digest: $digest"
+echo " $digest" 
 
 }
 
