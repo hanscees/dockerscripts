@@ -24,7 +24,28 @@ To use the scripts form docker install you must
   apt-get install jq
 
 To check if your running containers need an update:
-1- make sure 
+1- add info about your running conainers in a file
+
+################### run on dockerhost
+> ImageId-file
+for i in `docker images -f dangling=false| egrep -v TAG | awk '{print $3}'` ; do
+echo copying name, tag and image-ID digest to file
+ImageId=`docker image inspect $i | jq -r '.[0] | {Id: .Id}' | egrep Id | awk -F":" '{print $3'} \
+| awk -F"\"" '{print $1}'`
+ImageData=`docker images | egrep $i | awk '{print $1," " , $2}'`
+echo $ImageData $ImageId
+echo $ImageData $ImageId >> ImageId-file
+done
+####################
+
+cat ImageId-file
+mv get-docker-hub-image-tag-digest.sh getdigest
+mv   getdigest
+cat ImageId-file | ./check-docker-image-updates.sh
+
+
+
+
 
 
 
