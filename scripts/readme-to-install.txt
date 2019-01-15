@@ -42,8 +42,9 @@ cat ImageId-file
 mv get-docker-hub-image-tag-digest.sh getdigest  #yes its silly
 cat ImageId-file | ./check-docker-image-updates.sh
 
-
-
+check docker tags on an image like this:
+./get-docker-hub--image-tags.sh pihole/pihole
+./get-docker-hub--image-tags.sh library/nginx
 
 
 
