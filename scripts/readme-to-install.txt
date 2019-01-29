@@ -8,7 +8,7 @@ To use the scripts form docker install you must
  or 
  curl https://raw.githubusercontent.com/hanscees/dockerscripts/master/scripts/check-docker-image-updates.sh \
  > check-docker-image-updates.sh
- curl https://raw.githubusercontent.com/hanscees/dockerscripts/master/scripts/get-docker-hub--image-tags.sh \ 
+ curl https://raw.githubusercontent.com/hanscees/dockerscripts/master/scripts/get-docker-hub--image-tags.sh \
  > get-docker-hub--image-tags.sh
  curl https://raw.githubusercontent.com/hanscees/dockerscripts/master/scripts/get-docker-hub-image-tag-digest.sh \
  > get-docker-hub-image-tag-digest.sh
