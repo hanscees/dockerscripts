@@ -39,7 +39,6 @@ done
 ####################
 
 cat ImageId-file
-mv get-docker-hub-image-tag-digest.sh getdigest  #yes its silly
 cat ImageId-file | ./check-docker-image-updates.sh
 
 check docker tags on an image like this:
@@ -52,6 +51,11 @@ check docker tags on an image like this:
 
 - install pythno3.6 plus smtplib
   apt-get install python3 python3-pip
+
+##you must change the lines
+#LocalSmtpServerIp = "192.168.4.1"
+#
+#####################################
 
 send mail like
 echo yo yo yo | ./emailer.py -s " keep the fish"   -to hanscees@hanscees.con -body 
