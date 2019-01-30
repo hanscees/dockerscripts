@@ -32,8 +32,11 @@ for i in `docker images -f dangling=false| egrep -v TAG | awk '{print $3}'` ; do
 echo copying name, tag and image-ID digest to file
 ImageId=`docker image inspect $i | jq -r '.[0] | {Id: .Id}' | egrep Id | awk -F":" '{print $3'} \
 | awk -F"\"" '{print $1}'`
+RepoId=`docker image inspect $i | jq -r '.[0] | {RepId: .RepoDigests}' \
+| jq --raw-output  '.RepId | .[]'`
 ImageData=`docker images | egrep $i | awk '{print $1," " , $2}'`
 echo $ImageData $ImageId
+echo $ImageData $RepoId RepoId >> ImageId-file
 echo $ImageData $ImageId >> ImageId-file
 done
 ####################
