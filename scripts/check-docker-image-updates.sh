@@ -63,22 +63,22 @@ report_result () {
   }
 
 
-
-
 check_for_updates () {
   REPOS=$1
   TAG=$2
   ID=$3
   local myresult=0 #default return value
-  #echo $REPOS $TAG
+  timestamp=`date --rfc-3339=seconds`
+  echo $timestamp >> debug
+  echo $REPOS $TAG >> debug
   blub=`echo $REPOS | egrep "\/"`
   if [ ! "$blub" ] ; then REPOS=library/$REPOS ;fi  #add library/ before repro if needed
-  DockerIdNew=`./getdigest $REPOS $TAG | jq -r '.config.digest' | awk -F':' '{print $2}' `
-  #echo DockeridNew is $DockerIdNew
-  #echo DockerIdLocal is $ID
+  DockerIdNew=`./get-docker-hub-image-tag-digest.sh $REPOS $TAG | jq -r '.config.digest' | awk -F':' '{print $2}' `
+  echo DockeridNew is $DockerIdNew >> debug
+  echo DockerIdLocal is $ID >>debug
   if [ ! $DockerIdNew ] ; then myresult="" ;echo $myresult ; exit ;fi    #if empty image was probably built locally
 
-  if [ "$DockerIdNew" == "$ID" ] 
+  if [ "$DockerIdNew" == "$ID" ]
   then
     #echo "you r good, no updates for $REPOS:$TAG"
     myresult=""
@@ -86,10 +86,14 @@ check_for_updates () {
   else
     #echo "update available for $REPOS:$TAG"
     echo "update available for $REPOS:$TAG" >> UpdateTheseImages
+    echo "update available for $REPOS:$TAG" >> debug
     myresult=1
     echo $myresult
   fi
   }
+
+
+
 
 check_args() {
   if (($# != 3)); then
