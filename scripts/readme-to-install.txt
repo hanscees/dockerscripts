@@ -44,6 +44,12 @@ done
 cat ImageId-file
 cat ImageId-file | egrep -v "RepoId|none|^$" |  ./check-docker-image-updates.sh
 
+## this will show images that can be updated
+cat UpdateTheseImages 
+
+##this shows debug logging
+cat debug
+
 check docker tags on an image like this:
 ./get-docker-hub--image-tags.sh pihole/pihole
 ./get-docker-hub--image-tags.sh library/nginx
