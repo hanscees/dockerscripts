@@ -42,7 +42,7 @@ done
 ####################
 
 cat ImageId-file
-cat ImageId-file | ./check-docker-image-updates.sh
+cat ImageId-file | egrep -v "RepoId|none|^$" |  ./check-docker-image-updates.sh
 
 check docker tags on an image like this:
 ./get-docker-hub--image-tags.sh pihole/pihole
