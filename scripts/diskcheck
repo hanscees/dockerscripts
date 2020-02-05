@@ -28,7 +28,7 @@ then
   /usr/bin/logger $diskwarning
 
   if [ -f "$mailfile" ]; then
-     echo $diskwarning | mail -s "disk warning $hostname" hanscees@hanscees.net
+     echo $diskwarning | mail -s "disk warning $hostname" $WARNADDRESS
   fi
 
   if [ -f "$Pymail" ]; then
