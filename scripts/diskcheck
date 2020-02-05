@@ -1,0 +1,48 @@
+#!/bin/bash
+# Tested Under FreeBSD and OS X
+# by hanscees[at}hanscee.com 2020, no copyright, no guarantees
+
+
+#diskcheck: checks and warns by email if /boot is dangerously full
+# it depends on an emailscript. When it does not find /bin/mail from mailutils 
+#it can use  a simplistic python email script that is not very safe but works
+
+#variabels
+THRESHOLD=95  #how full is dangerously full
+WARNADDRESS="billgates@booboo.com"
+
+OUTPUT=($(LC_ALL=C df -P /boot))
+CURRENT=$(echo ${OUTPUT[11]} | sed 's/%//')
+CURRENTG=`df -hP / | head -n2 | tail -1 | awk '{print "diskwarning: available:", $4, "space taken", $5}'`
+#[ $CURRENT -gt $THRESHOLD ] && echo "The disk $FS ($CURRENT% used) is almost full. "
+if [ $CURRENT -gt $THRESHOLD ]
+then
+#partition=`df -kh | head -$i | tail -1| awk '{print $1}'`
+#echo "/root at $(hostname -f) is full perhaps:  ${CURRENTG} "
+  hostname=`hostname -f`
+  mailfile=/bin/mail
+  Pymail=/root/dockerscripts/emailer.py
+
+  diskwarning=`echo "/root at $(hostname -f) is full perhaps:  ${CURRENTG} "`
+  echo $diskwarning
+  /usr/bin/logger $diskwarning
+
+  if [ -f "$mailfile" ]; then
+     echo $diskwarning | mail -s "disk warning $hostname" hanscees@hanscees.net
+  fi
+
+  if [ -f "$Pymail" ]; then
+        echo $diskwarning | /root/dockerscripts/emailer.py -s "diskwarning $hostname" -to $WARNADDRESS -body
+  fi
+fi
+
+#docker warning: is deamon there?
+dockerwarning="Docker daemon seems to have died"
+checkdockerd=`ps waux | egrep "/usr/bin/dockerd" | egrep -v grep | wc -l`
+if  [ $checkdockerd -eq "0" ] ; then
+        echo "dockerd is down"
+        systemctl start docker
+        if [ -f "$Pymail" ]; then
+        echo $dockerwarning | /root/dockerscripts/emailer.py -s "dockerwarning $hostname" -to $WARNADDRESS -body
+  fi
+fi
