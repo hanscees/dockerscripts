@@ -100,7 +100,7 @@ if [ ! -z "$WHITELIST_INT_NETWORKS" ]; then
     then
        ##mynetwork needs to be added
        echo "yo need to act for fail2ban, my network is $WHITELIST_INT_NETWORKS"
-       sed -i "/^ignoreip / s|$| $WHITELIST_INT_NETWORKS|" /etc/fail2ban/jail.conf
+       sed -i "s/^#ignoreip/ignoreip/;/^ignoreip / s|$| $WHITELIST_INT_NETWORKS|" /etc/fail2ban/jail.conf
        #supervisorctl restart fail2ban
     fi
 
