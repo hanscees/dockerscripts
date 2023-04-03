@@ -4,10 +4,12 @@
 #script checks if new letsencrypt certificates are present in config dir.
 #if so they are copied and daemons restarted
 
-Currentcert=/etc/postfix/ssl/cert
+Currentcert=/etc/dms/tls/cert
+#Currentcert=/etc/postfix/ssl/cert
 CurrentcertD=/etc/postfix/ssl/cert #dovecot
 Newcert=/tmp/ssl/fullchain.pem
-Currentkey=/etc/postfix/ssl/key
+Currentkey=/etc/dms/tls/key
+#Currentkey=/etc/postfix/ssl/key
 CurrentkeyD=/etc/postfix/ssl/key #dovecot
 Newkey=/tmp/ssl/privkey.pem
 Backupkey="$Newkey.backup"
