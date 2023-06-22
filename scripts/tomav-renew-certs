@@ -1,8 +1,11 @@
 #!/bin/bash
 
 #script for tomav mailserver https://github.com/tomav/docker-mailserver/
+# and https://github.com/docker-mailserver/docker-mailserver
+# works fine for me on 2023-06
 #script checks if new letsencrypt certificates are present in config dir.
 #if so they are copied and daemons restarted
+# script is kicked of by refreshpemsmail.sh, that fetches certbox certificates from another host 
 
 Currentcert=/etc/dms/tls/cert
 #Currentcert=/etc/postfix/ssl/cert
